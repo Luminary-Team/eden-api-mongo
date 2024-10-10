@@ -1,4 +1,4 @@
-package com.luminary.apidemongo.Models;
+package com.luminary.apiedenmongo.Models;
 
 import lombok.Getter;
 import lombok.Setter;
