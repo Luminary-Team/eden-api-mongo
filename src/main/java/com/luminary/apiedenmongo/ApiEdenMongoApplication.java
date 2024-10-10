@@ -1,4 +1,4 @@
-package com.luminary.apiedenmongo;
+package com.luminary.apidemongo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.luminary.apiedenmongo;
+package com.luminary.apidemongo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
