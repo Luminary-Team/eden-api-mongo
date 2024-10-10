@@ -1,6 +1,6 @@
-package com.luminary.apidemongo.Repositories;
+package com.luminary.apiedenmongo.Repositories;
 
-import com.luminary.apidemongo.Models.News;
+import com.luminary.apiedenmongo.Models.News;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
