@@ -1,7 +1,7 @@
-package com.luminary.apidemongo.Services;
+package com.luminary.apiedenmongo.Services;
 
-import com.luminary.apidemongo.Repositories.ForumRepository;
-import com.luminary.apidemongo.Models.Forum;
+import com.luminary.apiedenmongo.Repositories.ForumRepository;
+import com.luminary.apiedenmongo.Models.Forum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
