@@ -17,4 +17,20 @@ public class ForumService {
     public List<Forum> getAllForum() {
         return forumRepository.findAll();
     }
+
+    public Forum getForumById(String id) {
+        return forumRepository.findById(id).orElse(null);
+    }
+
+    public Forum createForum(Forum forum) {
+        return forumRepository.save(forum);
+    }
+
+    public Forum updateForum(Forum forum) {
+        return forumRepository.save(forum);
+    }
+
+    public void deleteForum(String id) {
+        forumRepository.deleteById(id);
+    }
 }

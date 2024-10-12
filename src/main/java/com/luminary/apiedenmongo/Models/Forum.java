@@ -20,7 +20,7 @@ public class Forum {
     private String id;
 
     @Field(name = "user_id")
-    private long userId;
+    private int userId;
 
     @Field(name = "content")
     private int content;
