@@ -32,6 +32,7 @@
   <li>Config</li>
   <li>Controller</li>
   <li>Model</li>
+  <li>DTO</li>
   <li>Repository</li>
   <li>Service</li>
 <ul>
