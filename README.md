@@ -23,7 +23,7 @@
   <li>Spring Boot</li>
   <li>Spring Security</li>
   <li>Lombok</li>
-  <li>spring-boot-starter-data-mongodb</li>
+  <li>Spring Mongodb</li>
 </ul>
 
 <hr>
