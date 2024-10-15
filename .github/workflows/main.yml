@@ -19,3 +19,5 @@ jobs:
         # A Render API key
         api-key: ${{secrets.API_KEY}}
         wait-for-success: true
+      env:
+        DEBUG: TRUE
