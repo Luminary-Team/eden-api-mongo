@@ -1,4 +1,0 @@
-package com.luminary.apiedenmongo.Models.Responses;
-
-public class NewsResponse {
-}
