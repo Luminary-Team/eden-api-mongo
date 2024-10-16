@@ -1,14 +1,12 @@
-package com.luminary.apiedenmongo.dto;
+package com.luminary.apiedenmongo.Models.Requests;
 
-import com.luminary.apiedenmongo.Models.Forum;
+import com.luminary.apiedenmongo.Models.Collections.Forum;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
 @Getter
-public class ForumDto {
+public class ForumRequest {
 
     private int userId;
     private int content;
