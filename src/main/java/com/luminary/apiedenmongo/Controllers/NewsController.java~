@@ -19,6 +19,11 @@ public class NewsController {
 
     private final NewsService newsService;
 
+    // Simular um repositório em memória para demonstrar
+    private final List<News> newsList = List.of(
+            new News("https://example.com/news1", "Notícia 1", "Descrição da notícia 1", "2024-10-16"),
+            new News("https://example.com/news2", "Notícia 2", "Descrição da notícia 2", "2024-10-15")
+    );
 
     @Operation(summary = "Obter todas as notícias", description = "Retorna uma lista de todas as notícias.")
     @ApiResponses(value = {
@@ -27,7 +32,7 @@ public class NewsController {
     })
     @GetMapping
     public List<News> getAllNews() {
-        return newsService.getAllNews();
+        return newsList;
     }
 
     @Operation(summary = "Obter notícia por ID", description = "Retorna uma notícia específica pelo seu ID.")
@@ -37,7 +42,9 @@ public class NewsController {
     })
     @GetMapping("/{id}")
     public News getNewsById(@PathVariable String id) {
-        return newsService.getNewsById(id)
-                .orElseThrow(() -> new RuntimeException("Forum não encontrado"));
+        return newsList.stream()
+                .filter(news -> news.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Notícia não encontrada"));
     }
 }
