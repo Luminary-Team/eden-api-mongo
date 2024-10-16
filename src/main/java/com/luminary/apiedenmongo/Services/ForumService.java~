@@ -19,13 +19,16 @@ import java.util.Optional;
 public class ForumService {
     private final ForumRepository forumRepository;
 
+    @Autowired
+    public ForumService(ForumRepository forumRepository) {
+        this.forumRepository = forumRepository;
+    }
+
     public List<Forum> getAllForums() {
-        log.info("[FORUM] Fetching all forums");
         return forumRepository.findAll();
     }
 
     public Optional<Forum> getForumById(String id) {
-        log.info("[FORUM] Fetching forum by ID: " + id);
         return forumRepository.findById(id);
     }
 }

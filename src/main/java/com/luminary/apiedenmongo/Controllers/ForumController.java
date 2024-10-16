@@ -1,9 +1,12 @@
 package com.luminary.apiedenmongo.Controllers;
 
-import com.luminary.apiedenmongo.Models.Forum;
+import com.luminary.apiedenmongo.Models.Collections.Forum;
 import com.luminary.apiedenmongo.Services.ForumService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,32 +14,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/forum")
 @RequiredArgsConstructor
+@Tag(name = "Forum", description = "Operações relacionadas aos fóruns.")
 public class ForumController {
 
     private final ForumService forumService;
 
-    @GetMapping()
-    public ResponseEntity<List<Forum>> getAllForum() {
-        return ResponseEntity.ok().body(forumService.getAllForum());
+    @Operation(summary = "Obter todos os fóruns", description = "Retorna uma lista de todos os fóruns.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de fóruns retornada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping
+    public List<Forum> getAllForums() {
+        return forumService.getAllForums();
     }
 
-    @GetMapping("{forumId}")
-    public ResponseEntity<Forum> getForumById(String forumId) {
-        return ResponseEntity.ok().body(forumService.getForumById(forumId));
-    }
-
-    @PostMapping()
-    public ResponseEntity<Forum> createForum(Forum forum) {
-        return ResponseEntity.ok().body(forumService.createForum(forum));
-    }
-
-    @PutMapping("{forumId}")
-    public ResponseEntity<Forum> updateForum(Forum forum) {
-        return ResponseEntity.ok().body(forumService.updateForum(forum));
-    }
-
-    @DeleteMapping("{forumId}")
-    public void deleteForum(String forumId) {
-        forumService.deleteForum(forumId);
+    @Operation(summary = "Obter fórum por ID", description = "Retorna um fórum específico pelo seu ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Fórum retornado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Fórum não encontrado")
+    })
+    @GetMapping("/{id}")
+    public Forum getForumById(@PathVariable String id) {
+        return forumService.getForumById(id)
+                .orElseThrow(() -> new RuntimeException("Fórum não encontrado"));
     }
 }
