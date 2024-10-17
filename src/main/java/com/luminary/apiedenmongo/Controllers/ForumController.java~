@@ -1,6 +1,6 @@
 package com.luminary.apiedenmongo.Controllers;
 
-import com.luminary.apiedenmongo.Models.Database.Forum;
+import com.luminary.apiedenmongo.Models.Collections.Forum;
 import com.luminary.apiedenmongo.Services.ForumService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

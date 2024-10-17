@@ -1,6 +1,6 @@
 package com.luminary.apiedenmongo.Controllers;
 
-import com.luminary.apiedenmongo.Models.Database.News;
+import com.luminary.apiedenmongo.Models.Collections.News;
 import com.luminary.apiedenmongo.Services.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

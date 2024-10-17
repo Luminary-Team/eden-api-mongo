@@ -1,6 +1,6 @@
 package com.luminary.apiedenmongo.Models.Requests;
 
-import com.luminary.apiedenmongo.Models.Database.Forum;
+import com.luminary.apiedenmongo.Models.Collections.Forum;
 import lombok.Getter;
 
 import java.util.List;
