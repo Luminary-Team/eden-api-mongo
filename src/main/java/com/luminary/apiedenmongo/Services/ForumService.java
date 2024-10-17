@@ -1,10 +1,8 @@
 package com.luminary.apiedenmongo.Services;
 
-import com.luminary.apiedenmongo.Models.Responses.ForumResponse;
 import com.luminary.apiedenmongo.Repositories.ForumRepository;
-import com.luminary.apiedenmongo.Models.Collections.Forum;
+import com.luminary.apiedenmongo.Models.Database.Forum;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.luminary.apiedenmongo.Services;
 
 import com.luminary.apiedenmongo.Repositories.NewsRepository;
-import com.luminary.apiedenmongo.Models.Collections.News;
+import com.luminary.apiedenmongo.Models.Database.News;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

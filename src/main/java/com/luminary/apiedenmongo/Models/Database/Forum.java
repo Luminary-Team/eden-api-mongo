@@ -1,4 +1,4 @@
-package com.luminary.apiedenmongo.Models.Collections;
+package com.luminary.apiedenmongo.Models.Database;
 
 import io.swagger.v3.oas.annotations.media.Schema; // Swagger/OpenAPI annotation
 import jakarta.validation.constraints.NotNull;
