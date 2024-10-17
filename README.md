@@ -29,13 +29,17 @@
 <hr>
 
 <h2>📂 Estrutura do Repositório</h2>
-  <li>Config</li>
-  <li>Controller</li>
-  <li>Model</li>
-  <li>DTO</li>
-  <li>Repository</li>
-  <li>Service</li>
 <ul>
+  <li>Controllers</li>
+  <li>Modesl</li>
+  <ul>
+    <li>Database</li>
+    <li>Exception</li>
+    <li>Requests</li>
+    <li>Responses</li>
+  </ul>
+  <li>Repositories</li>
+  <li>Services</li>
 </ul>
 
 <h2>📚 Sobre o Projeto</h2>
