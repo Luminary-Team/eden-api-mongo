@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 public class ForumResponse {
     int userId;
-    int content;
+    String content;
     List<Forum.Comment> comments;
     List<Long> likeId;
 
