@@ -36,8 +36,6 @@
   <ul>
     <li>Database</li>
     <li>Exception</li>
-    <li>Requests</li>
-    <li>Responses</li>
   </ul>
   <li>Repository</li>
   <li>Service</li>
