@@ -14,36 +14,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/forum")
 @RequiredArgsConstructor
-@Tag(name = "Forum", description = "Operações relacionadas aos fóruns.")
+@Tag(name = "Forum", description = "Operations related to forums.")
 public class ForumController {
 
     private final ForumService forumService;
 
-    @Operation(summary = "Obter todos os fóruns", description = "Retorna uma lista de todos os fóruns.")
+    @Operation(summary = "Get all the forums", description = "Returns a list of all forums.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de fóruns retornada com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+            @ApiResponse(responseCode = "200", description = "Successfully returned list of forums"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
     public List<Forum> getAllForums() {
         return forumService.getAllForums();
     }
 
-    @Operation(summary = "Obter fórum por ID", description = "Retorna um fórum específico pelo seu ID.")
+    @Operation(summary = "Get forum by ID", description = "Returns a specific forum by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Fórum retornado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Fórum não encontrado")
+            @ApiResponse(responseCode = "200", description = "Forum successfully returned"),
+            @ApiResponse(responseCode = "404", description = "Forum not found")
     })
     @GetMapping("/{id}")
     public Forum getForumById(@PathVariable String id) {
         return forumService.getForumById(id)
-                .orElseThrow(() -> new RuntimeException("Fórum não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Fórum not found"));
     }
 
-    @Operation(summary = "Criar fórum", description = "Cria um novo fórum.")
+    @Operation(summary = "Create forum", description = "Create a new forum.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Fórum criado com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+            @ApiResponse(responseCode = "201", description = "Forum created successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
     public Forum createForum(@RequestBody Forum forum) {
