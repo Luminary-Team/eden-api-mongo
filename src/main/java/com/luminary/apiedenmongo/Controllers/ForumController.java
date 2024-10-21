@@ -40,6 +40,11 @@ public class ForumController {
                 .orElseThrow(() -> new RuntimeException("Fórum não encontrado"));
     }
 
+    @Operation(summary = "Criar fórum", description = "Cria um novo fórum.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Fórum criado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @PostMapping
     public Forum createForum(@RequestBody Forum forum) {
         return forumService.createForum(forum);
