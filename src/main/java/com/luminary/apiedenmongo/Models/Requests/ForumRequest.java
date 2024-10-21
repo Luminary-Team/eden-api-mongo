@@ -9,7 +9,7 @@ import java.util.List;
 public class ForumRequest {
 
     private int userId;
-    private int content;
+    private String content;
     private List<Forum.Comment> comments;
     private List<Long> likeId;
 
