@@ -31,7 +31,7 @@ public class Forum {
     @Field(name = "content")
     @NotNull(message = "content cannot be null")
     @Schema(description = "Conteúdo do fórum.", example = "Este é o conteúdo do fórum")
-    private int content;
+    private String content;
 
     @Field(name = "comments")
     @Schema(description = "Lista de comentários associados ao fórum.", example = "[{user_id: 123, content: 'Comentário 1'}, {user_id: 456, content: 'Comentário 2'}]")
@@ -51,6 +51,6 @@ public class Forum {
         private int userId;
 
         @Schema(description = "Conteúdo do comentário.", example = "Este é um comentário.")
-        private int content;
+        private String content;
     }
 }

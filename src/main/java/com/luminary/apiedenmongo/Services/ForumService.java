@@ -26,4 +26,9 @@ public class ForumService {
         log.info("[FORUM] Fetching forum by ID: " + id);
         return forumRepository.findById(id);
     }
+
+    public Forum createForum(Forum forum) {
+        log.info("[FORUM] Creating forum: " + forum);
+        return forumRepository.save(forum);
+    }
 }
