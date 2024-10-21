@@ -14,30 +14,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/news")
 @RequiredArgsConstructor
-@Tag(name = "News", description = "API para manipular notícias")
+@Tag(name = "News", description = "Operations related to news")
 public class NewsController {
 
     private final NewsService newsService;
 
 
-    @Operation(summary = "Obter todas as notícias", description = "Retorna uma lista de todas as notícias.")
+    @Operation(summary = "Get all the news" +
+            "", description = "Returns a list of all news.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de notícias retornada com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+            @ApiResponse(responseCode = "200", description = "News list successfully returned"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
     public List<News> getAllNews() {
         return newsService.getAllNews();
     }
 
-    @Operation(summary = "Obter notícia por ID", description = "Retorna uma notícia específica pelo seu ID.")
+    @Operation(summary = "Get news by ID", description = "Returns a specific news by your ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Notícia retornada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Notícia não encontrada")
+            @ApiResponse(responseCode = "200", description = "News successfully returned"),
+            @ApiResponse(responseCode = "404", description = "News not found")
     })
     @GetMapping("/{id}")
     public News getNewsById(@PathVariable String id) {
         return newsService.getNewsById(id)
-                .orElseThrow(() -> new RuntimeException("Forum não encontrado"));
+                .orElseThrow(() -> new RuntimeException("News not found"));
     }
 }

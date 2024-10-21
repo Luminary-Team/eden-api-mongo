@@ -15,42 +15,42 @@ import java.util.List;
 @Setter
 @ToString
 @Document(collection = "Forum")
-@Schema(description = "Representação de um fórum com conteúdo, comentários e likes.")
+@Schema(description = "Representation of a forum with content, comments and likes.")
 public class Forum {
 
     @Id
     @Field(name = "_id")
-    @Schema(description = "Identificador único do fórum.")
+    @Schema(description = "Forum ID.")
     private String id;
 
     @Field(name = "user_id")
     @NotNull(message = "user_id cannot be null")
-    @Schema(description = "ID do usuário que criou o fórum.", example = "12345")
+    @Schema(description = "User ID of the forum creator.", example = "12345")
     private int userId;
 
     @Field(name = "content")
     @NotNull(message = "content cannot be null")
-    @Schema(description = "Conteúdo do fórum.", example = "Este é o conteúdo do fórum")
+    @Schema(description = "Forum content.", example = "This is the forum content")
     private String content;
 
     @Field(name = "comments")
-    @Schema(description = "Lista de comentários associados ao fórum.", example = "[{user_id: 123, content: 'Comentário 1'}, {user_id: 456, content: 'Comentário 2'}]")
+    @Schema(description = "List of comments associated with the forum.", example = "[{user_id: 123, content: 'Content 1'}, {user_id: 456, content: 'Content 2'}]")
     private List<Comment> comments;
 
     @Field(name = "like_id")
-    @Schema(description = "Lista de IDs de usuários que curtiram o fórum.", example = "[123, 456, 789]")
+    @Schema(description = "List of user IDs that liked the forum.", example = "[123, 456, 789]")
     private List<Long> likeId;
 
     @Getter
     @Setter
     @ToString
-    @Schema(description = "Comentário feito por um usuário no fórum.")
+    @Schema(description = "Comment made by a user in the forum.")
     public static class Comment {
-        @Schema(description = "ID do usuário que fez o comentário.", example = "123")
+        @Schema(description = "User ID of the comment.", example = "123")
         @NotNull(message = "user_id cannot be null")
         private int userId;
 
-        @Schema(description = "Conteúdo do comentário.", example = "Este é um comentário.")
+        @Schema(description = "Content of the comment.", example = "This is a content.")
         private String content;
     }
 }

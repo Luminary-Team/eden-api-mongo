@@ -15,36 +15,36 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @ToString
 @Document(collection = "News")
-@Schema(description = "Representação de uma noticia.")
+@Schema(description = "Representation of a news.")
 public class News {
 
     @Id
     @Field(name = "_id")
-    @Schema(description = "Identificador único da noticia.", example = "12345")
+    @Schema(description = "News ID.", example = "12345")
     private String id;
 
     @Field(name = "url")
     @NotNull(message = "url cannot be null")
     @Pattern(regexp = "https?://.*", message = "url must be a valid URL")
-    @Schema(description = "URL da noticia.", example = "https://example.com/news")
+    @Schema(description = "URL of the news.", example = "https://example.com/news")
     private String url;
 
     @Field(name = "title")
     @NotNull(message = "title cannot be null")
     @Size(min = 5, max = 100, message = "title must be between 5 and 100 characters")
-    @Schema(description = "Título da noticia.", example = "Noticia exemplo")
+    @Schema(description = "Title of the news.", example = "News Title")
     private String title;
 
     @Field(name = "description")
     @NotNull(message = "description cannot be null")
     @Size(min = 10, message = "description must have at least 10 characters")
-    @Schema(description = "Descrição da noticia.", example = "Esta é a descrição da noticia")
+    @Schema(description = "Description of the news.", example = "This is the description of the news")
     private String description;
 
     @Field(name = "date")
     @NotNull(message = "date cannot be null")
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "date must follow the format YYYY-MM-DD")
-    @Schema(description = "Data da noticia.", example = "2024-10-16")
+    @Schema(description = "Date of news.", example = "2024-10-16")
     private String date;
 
     public News(String url, String title, String description, String date) {
