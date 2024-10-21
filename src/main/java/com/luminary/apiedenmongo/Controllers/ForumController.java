@@ -39,4 +39,9 @@ public class ForumController {
         return forumService.getForumById(id)
                 .orElseThrow(() -> new RuntimeException("Fórum não encontrado"));
     }
+
+    @PostMapping
+    public Forum createForum(@RequestBody Forum forum) {
+        return forumService.createForum(forum);
+    }
 }
