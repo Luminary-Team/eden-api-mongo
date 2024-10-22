@@ -34,7 +34,7 @@ public class Forum {
     private String content;
 
     @Field(name = "comments")
-    @Schema(description = "List of comments associated with the forum.", example = "[{user_id: 123, content: 'Content 1'}, {user_id: 456, content: 'Content 2'}]")
+    @Schema(description = "List of comments associated with the forum.")
     private List<Comment> comments;
 
     @Field(name = "like_id")
