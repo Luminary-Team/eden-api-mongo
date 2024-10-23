@@ -1,10 +1,11 @@
 package com.luminary.apiedenmongo.Models.Database;
 
-import io.swagger.v3.oas.annotations.media.Schema; // Swagger/OpenAPI annotation
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -21,7 +22,7 @@ public class Forum {
     @Id
     @Field(name = "_id")
     @Schema(description = "Forum ID.")
-    private String id;
+    private ObjectId id;
 
     @Field(name = "user_id")
     @NotNull(message = "user_id cannot be null")
