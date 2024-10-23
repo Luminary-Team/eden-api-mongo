@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/forum")
@@ -39,13 +38,7 @@ public class ForumController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<ForumResponse> getForumById(@PathVariable("id") String id) {
-        Optional<Forum> forumOptional = forumService.getForumById(id);
-        if (forumOptional.isPresent()) {
-            ForumResponse response = new ForumResponse(forumOptional.get());
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return forumService.getForumById(id);
     }
 
     @Operation(summary = "Create forum", description = "Create a new forum.")
@@ -54,7 +47,7 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public Forum createForum(@RequestBody Forum forum) {
+    public ResponseEntity<Forum> createForum(@RequestBody Forum forum) {
         return forumService.createForum(forum);
     }
 }
