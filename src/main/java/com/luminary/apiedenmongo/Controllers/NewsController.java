@@ -1,15 +1,19 @@
 package com.luminary.apiedenmongo.Controllers;
 
 import com.luminary.apiedenmongo.Models.Database.News;
+import com.luminary.apiedenmongo.Models.Response.ForumResponse;
+import com.luminary.apiedenmongo.Models.Response.NewsResponse;
 import com.luminary.apiedenmongo.Services.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/news")
@@ -18,7 +22,6 @@ import java.util.List;
 public class NewsController {
 
     private final NewsService newsService;
-
 
     @Operation(summary = "Get all the news" +
             "", description = "Returns a list of all news.")
@@ -37,8 +40,13 @@ public class NewsController {
             @ApiResponse(responseCode = "404", description = "News not found")
     })
     @GetMapping("/{id}")
-    public News getNewsById(@PathVariable String id) {
-        return newsService.getNewsById(id)
-                .orElseThrow(() -> new RuntimeException("News not found"));
+    public ResponseEntity<NewsResponse> getNewsById(@PathVariable("id") String id) {
+        Optional<News> newsOptional = newsService.getNewsById(id);
+        if (newsOptional.isPresent()) {
+            NewsResponse response = new NewsResponse(newsOptional.get());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
