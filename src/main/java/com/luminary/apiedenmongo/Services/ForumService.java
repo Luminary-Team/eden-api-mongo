@@ -21,9 +21,11 @@ import java.util.Optional;
 public class ForumService {
     private final ForumRepository forumRepository;
 
-    public List<Forum> getAllForums() {
+    public List<ForumResponse> getAllForums() {
         log.info("[FORUM] Fetching all forums");
-        return forumRepository.findAll();
+        return forumRepository.findAll().stream()
+                .map(ForumResponse::new)
+                .toList();
     }
 
     public ResponseEntity<ForumResponse> getForumById(String id) {

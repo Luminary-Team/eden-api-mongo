@@ -27,7 +27,7 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<Forum> getAllForums() {
+    public List<ForumResponse> getAllForums() {
         return forumService.getAllForums();
     }
 
