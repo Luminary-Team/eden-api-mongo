@@ -15,6 +15,7 @@ public class ForumRequest {
     private String content;
 
     public ForumRequest(int userId, String content) {
+        
         this.userId = userId;
         this.content = content;
     }
