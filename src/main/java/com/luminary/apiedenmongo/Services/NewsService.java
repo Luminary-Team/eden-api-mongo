@@ -1,6 +1,7 @@
 package com.luminary.apiedenmongo.Services;
 
 import com.luminary.apiedenmongo.Models.Database.News;
+import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Models.Response.NewsResponse;
 import com.luminary.apiedenmongo.Repositories.NewsRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,11 @@ import java.util.Optional;
 public class NewsService {
     private final NewsRepository newsRepository;
 
-    public List<News> getAllNews() {
+    public List<NewsResponse> getAllNews() {
         log.info("[NEWS] Fetching all news");
-        return newsRepository.findAll();
+        return newsRepository.findAll().stream()
+                .map(NewsResponse::new)
+                .toList();
     }
 
     public ResponseEntity<NewsResponse> getNewsById(String id) {
