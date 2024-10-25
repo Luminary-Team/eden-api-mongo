@@ -21,7 +21,6 @@ public class Forum {
 
     @Id
     @Field(name = "_id")
-    @Schema(description = "Forum ID.")
     private ObjectId id;
 
     @Field(name = "user_id")
@@ -35,11 +34,9 @@ public class Forum {
     private String content;
 
     @Field(name = "comments")
-    @Schema(description = "List of comments associated with the forum.")
     private List<Comment> comments;
 
     @Field(name = "like_id")
-    @Schema(description = "List of user IDs that liked the forum.", example = "[123, 456, 789]")
     private List<Long> likeId;
 
     @Getter
