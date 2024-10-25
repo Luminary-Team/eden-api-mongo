@@ -1,6 +1,7 @@
 package com.luminary.apiedenmongo.Controllers;
 
 import com.luminary.apiedenmongo.Models.Database.Forum;
+import com.luminary.apiedenmongo.Models.Request.ForumRequest;
 import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Services.ForumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/forum")
@@ -47,7 +49,18 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public ResponseEntity<Forum> createForum(@RequestBody Forum forum) {
+    public ResponseEntity<ForumResponse> createForum(@RequestBody ForumRequest forum) {
         return forumService.createForum(forum);
     }
+
+    @Operation(summary = "Add a comment to a forum", description = "Adds a comment to a specified forum.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comment added successfully"),
+            @ApiResponse(responseCode = "404", description = "Forum not found")
+    })
+    @PostMapping("/comment/{id}")
+    public ResponseEntity<ForumResponse> addComment(@PathVariable("id") String id, @RequestBody Forum.Comment comment) {
+        return forumService.addComment(id, comment);
+    }
+
 }
