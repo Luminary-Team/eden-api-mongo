@@ -27,7 +27,7 @@ public class NewsController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<News> getAllNews() {
+    public List<NewsResponse> getAllNews() {
         return newsService.getAllNews();
     }
 
