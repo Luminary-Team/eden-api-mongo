@@ -2,6 +2,7 @@ package com.luminary.apiedenmongo.Controllers;
 
 import com.luminary.apiedenmongo.Models.Database.Forum;
 import com.luminary.apiedenmongo.Models.Request.ForumRequest;
+import com.luminary.apiedenmongo.Models.Request.LikeRequest;
 import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Services.ForumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,5 +62,15 @@ public class ForumController {
     @PostMapping("/{forumId}")
     public ResponseEntity<ForumResponse> addComment(@PathVariable("forumId") String forumId, @RequestBody Forum.Comment comment) {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.addComment(forumId, comment));
+    }
+
+    @Operation(summary = "Add like to forum", description = "Add a new like to a forum.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Like added successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping("/like/{forumId}")
+    public ResponseEntity<ForumResponse> addLike(@PathVariable("forumId") String forumId, @RequestBody LikeRequest likeRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(forumService.addLike(forumId, likeRequest));
     }
 }
