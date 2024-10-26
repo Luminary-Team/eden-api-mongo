@@ -1,6 +1,7 @@
 package com.luminary.apiedenmongo.Controllers;
 
 import com.luminary.apiedenmongo.Models.Database.Forum;
+import com.luminary.apiedenmongo.Models.Request.ForumRequest;
 import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Services.ForumService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +29,8 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<ForumResponse> getAllForums() {
-        return forumService.getAllForums();
+    public ResponseEntity<List<ForumResponse>> getAllForums() {
+        return ResponseEntity.status(HttpStatus.OK).body(forumService.getAllForums());
     }
 
     @Operation(summary = "Get forum by ID", description = "Returns a specific forum by its ID.")
@@ -38,7 +40,7 @@ public class ForumController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<ForumResponse> getForumById(@PathVariable("id") String id) {
-        return forumService.getForumById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(forumService.getForumById(id));
     }
 
     @Operation(summary = "Create forum", description = "Create a new forum.")
@@ -47,7 +49,7 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public ResponseEntity<Forum> createForum(@RequestBody Forum forum) {
-        return forumService.createForum(forum);
+    public ResponseEntity<ForumResponse> createForum(@RequestBody ForumRequest forum) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(forumService.createForum(forum));
     }
 }

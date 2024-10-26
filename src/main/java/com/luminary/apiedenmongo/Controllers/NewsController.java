@@ -1,6 +1,5 @@
 package com.luminary.apiedenmongo.Controllers;
 
-import com.luminary.apiedenmongo.Models.Database.News;
 import com.luminary.apiedenmongo.Models.Response.NewsResponse;
 import com.luminary.apiedenmongo.Services.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,16 +28,6 @@ public class NewsController {
     })
     @GetMapping
     public List<NewsResponse> getAllNews() {
-        return newsService.getAllNews();
-    }
-
-    @Operation(summary = "Get news by ID", description = "Returns a specific news by your ID.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "News successfully returned"),
-            @ApiResponse(responseCode = "404", description = "News not found")
-    })
-    @GetMapping("/{id}")
-    public ResponseEntity<NewsResponse> getNewsById(@PathVariable("id") String id) {
-        return newsService.getNewsById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(newsService.getAllNews()).getBody();
     }
 }

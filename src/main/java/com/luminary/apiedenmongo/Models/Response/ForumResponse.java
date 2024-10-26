@@ -20,7 +20,6 @@ public class ForumResponse {
         this.userId = forum.getUserId();
         this.content = forum.getContent();
         this.comments = forum.getComments();
-
         this.likeId = forum.getLikeId();
     }
 }
