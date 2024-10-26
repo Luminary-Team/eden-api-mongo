@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,6 +41,8 @@ public class ForumService {
         Forum forum = new Forum();
         forum.setUserId(forumRequest.getUserId());
         forum.setContent(forumRequest.getContent());
+        forum.setComments(new ArrayList<>());
+        forum.setLikeId(new ArrayList<>());
 
         log.info("[FORUM] Persisting forum in database");
         Forum savedForum = forumRepository.save(forum);
@@ -48,4 +51,20 @@ public class ForumService {
         return new ForumResponse(savedForum);
     }
 
+    public ForumResponse addComment(String forumId, Forum.Comment comment) {
+        log.info("[FORUM] Adding comment to forum ID: " + forumId);
+        Forum forum = forumRepository.findById(new ObjectId(forumId))
+                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
+
+        if (forum.getComments() == null) {
+            forum.setComments(new ArrayList<>());
+        }
+
+        forum.getComments().add(comment);
+        log.info("[FORUM] Persisting updated forum in database");
+        Forum updatedForum = forumRepository.save(forum);
+        log.info("[FORUM] Comment added successfully to forum ID: " + forumId);
+
+        return new ForumResponse(updatedForum);
+    }
 }
