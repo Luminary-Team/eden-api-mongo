@@ -52,4 +52,14 @@ public class ForumController {
     public ResponseEntity<ForumResponse> createForum(@RequestBody ForumRequest forum) {
         return ResponseEntity.status(HttpStatus.CREATED).body(forumService.createForum(forum));
     }
+
+    @Operation(summary = "Add comment to forum", description = "Add a new comment to a forum.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comment added successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping("/{forumId}")
+    public ResponseEntity<ForumResponse> addComment(@PathVariable("forumId") String forumId, @RequestBody Forum.Comment comment) {
+        return ResponseEntity.status(HttpStatus.OK).body(forumService.addComment(forumId, comment));
+    }
 }
