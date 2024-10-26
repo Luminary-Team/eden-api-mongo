@@ -49,6 +49,7 @@ public class Forum {
         private int userId;
 
         @Schema(description = "Content of the comment.", example = "This is a content.")
+        @NotNull(message = "content cannot be null")
         private String content;
     }
 }
