@@ -59,7 +59,7 @@ public class ForumController {
             @ApiResponse(responseCode = "200", description = "Comment added successfully"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @PostMapping("/{forumId}")
+    @PostMapping("/comment/{forumId}")
     public ResponseEntity<ForumResponse> addComment(@PathVariable("forumId") String forumId, @RequestBody Forum.Comment comment) {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.addComment(forumId, comment));
     }
