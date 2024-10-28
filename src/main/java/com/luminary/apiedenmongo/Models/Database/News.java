@@ -47,11 +47,4 @@ public class News {
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "date must follow the format YYYY-MM-DD")
     @Schema(description = "Date of news.", example = "2024-10-16")
     private String date;
-
-    public News(String url, String title, String description, String date) {
-        this.url = url;
-        this.title = title;
-        this.description = description;
-        this.date = date;
-    }
 }
