@@ -1,5 +1,6 @@
 package com.luminary.apiedenmongo.Controllers;
 
+import com.luminary.apiedenmongo.Models.Request.NewsRequest;
 import com.luminary.apiedenmongo.Models.Response.NewsResponse;
 import com.luminary.apiedenmongo.Services.NewsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +28,18 @@ public class NewsController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping
-    public List<NewsResponse> getAllNews() {
-        return ResponseEntity.status(HttpStatus.OK).body(newsService.getAllNews()).getBody();
+    public ResponseEntity<List<NewsResponse>> getAllNews() {
+        return ResponseEntity.status(HttpStatus.OK).body(newsService.getAllNews());
+    }
+
+
+    @Operation(summary = "Create news", description = "Create a new news.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "News created successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping
+    public ResponseEntity<NewsResponse> createNews(@RequestBody NewsRequest news) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(newsService.createNews(news));
     }
 }
