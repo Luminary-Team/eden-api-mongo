@@ -74,6 +74,11 @@ public class ForumService {
         Forum forum = forumRepository.findById(new ObjectId(forumId))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
 
+        if (forum.getLikeId() != null && forum.getLikeId().contains(likeRequest.getUserId())) {
+            log.info("[FORUM] Like already exists for user ID: " + likeRequest.getUserId());
+            return new ForumResponse(forum);
+        }
+
         if (forum.getLikeId() == null) {
             forum.setLikeId(new ArrayList<>());
         }
