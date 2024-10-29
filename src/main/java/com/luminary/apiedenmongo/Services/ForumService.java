@@ -28,7 +28,9 @@ public class ForumService {
 
     public ForumResponse getForumById(String id) {
         log.info("[FORUM] Fetching forum by ID: " + id);
-        Forum forum = forumRepository.findById(new ObjectId(id))
+        if (id.length() != 24) {
+            throw new HttpError(HttpStatus.BAD_REQUEST, "ID com tamanho inválido");
+        }        Forum forum = forumRepository.findById(new ObjectId(id))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
         log.info("[FORUM] Forum found with ID: " + id);
         return new ForumResponse(forum);
