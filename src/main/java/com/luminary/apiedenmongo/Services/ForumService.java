@@ -2,7 +2,6 @@ package com.luminary.apiedenmongo.Services;
 
 import com.luminary.apiedenmongo.Models.Database.Forum;
 import com.luminary.apiedenmongo.Models.Request.ForumRequest;
-import com.luminary.apiedenmongo.Models.Request.LikeRequest;
 import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Repositories.ForumRepository;
 import com.luminary.apiedenmongo.Models.Exception.HttpError;
@@ -30,9 +29,7 @@ public class ForumService {
 
     public ForumResponse getForumById(String id) {
         log.info("[FORUM] Fetching forum by ID: " + id);
-        if (id.length() != 24) {
-            throw new HttpError(HttpStatus.BAD_REQUEST, "ID com tamanho inválido");
-        }        Forum forum = forumRepository.findById(new ObjectId(id))
+        Forum forum = forumRepository.findById(new ObjectId(id))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
         log.info("[FORUM] Forum found with ID: " + id);
         return new ForumResponse(forum);
@@ -45,7 +42,6 @@ public class ForumService {
         forum.setUserId(forumRequest.getUserId());
         forum.setContent(forumRequest.getContent());
         forum.setComments(new ArrayList<>());
-        forum.setLikeId(new ArrayList<>());
 
         log.info("[FORUM] Persisting forum in database");
         Forum savedForum = forumRepository.save(forum);
@@ -67,28 +63,6 @@ public class ForumService {
         log.info("[FORUM] Persisting updated forum in database");
         Forum updatedForum = forumRepository.save(forum);
         log.info("[FORUM] Comment added successfully to forum ID: " + forumId);
-
-        return new ForumResponse(updatedForum);
-    }
-
-    public ForumResponse addLike(String forumId, LikeRequest likeRequest) {
-        log.info("[FORUM] Adding like to forum ID: " + forumId);
-        Forum forum = forumRepository.findById(new ObjectId(forumId))
-                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
-
-        if (forum.getLikeId() != null && forum.getLikeId().contains(likeRequest.getUserId())) {
-            log.info("[FORUM] Like already exists for user ID: " + likeRequest.getUserId());
-            return new ForumResponse(forum);
-        }
-
-        if (forum.getLikeId() == null) {
-            forum.setLikeId(new ArrayList<>());
-        }
-
-        forum.getLikeId().add(likeRequest.getUserId());
-        log.info("[FORUM] Persisting updated forum in database");
-        Forum updatedForum = forumRepository.save(forum);
-        log.info("[FORUM] Like added successfully to forum ID: " + forumId);
 
         return new ForumResponse(updatedForum);
     }
