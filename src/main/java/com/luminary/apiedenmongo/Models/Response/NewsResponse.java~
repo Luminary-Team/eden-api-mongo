@@ -4,20 +4,20 @@ import com.luminary.apiedenmongo.Models.Database.News;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Getter
 @Setter
 public class NewsResponse {
-    private Integer id;
+    private String id;
     private String url;
     private String title;
     private String description;
-    private Date date;
+    private LocalDateTime date;
 
     public NewsResponse(News news) {
-        this.id = news.getId();
+        this.id = news.getId().toHexString();
         this.url = news.getUrl();
         this.title = news.getTitle();
         this.description = news.getDescription();

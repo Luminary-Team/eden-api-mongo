@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class ForumController {
             @ApiResponse(responseCode = "404", description = "Forum not found")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ForumResponse> getForumById(@PathVariable("id") Integer id) {
+    public ResponseEntity<ForumResponse> getForumById(@PathVariable("id") String id) {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.getForumById(id));
     }
 
@@ -59,7 +60,7 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/comment/{forumId}")
-    public ResponseEntity<ForumResponse> addComment(@PathVariable("forumId") Integer forumId, @RequestBody Forum.Comment comment) {
+    public ResponseEntity<ForumResponse> addComment(@PathVariable("forumId") String forumId, @RequestBody Forum.Comment comment) {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.addComment(forumId, comment));
     }
 }

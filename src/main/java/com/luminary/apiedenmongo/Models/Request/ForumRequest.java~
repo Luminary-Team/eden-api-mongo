@@ -21,6 +21,9 @@ public class ForumRequest {
     @NotNull(message = "content cannot be null")
     private String content;
 
+    @NotNull(message = "post_date cannot be null")
+    private LocalDateTime postDate = LocalDateTime.now();
+
     public ForumRequest(int userId, String content) {
         this.userId = userId;
         this.content = content;

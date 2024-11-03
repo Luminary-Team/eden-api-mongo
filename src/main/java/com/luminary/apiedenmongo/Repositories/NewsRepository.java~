@@ -1,10 +1,10 @@
 package com.luminary.apiedenmongo.Repositories;
 
-import com.luminary.apiedenmongo.Models.Database.Forum;
+import com.luminary.apiedenmongo.Models.Database.News;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ForumRepository extends MongoRepository<Forum, ObjectId> {
+public interface NewsRepository extends MongoRepository<News, Integer> {
 }

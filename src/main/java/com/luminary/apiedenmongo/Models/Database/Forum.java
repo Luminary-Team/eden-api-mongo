@@ -6,13 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -24,7 +22,7 @@ public class Forum {
 
     @Id
     @Field(name = "_id")
-    private Integer id;
+    private ObjectId id;
 
     @Field(name = "user_id")
     @NotNull(message = "user_id cannot be null")
@@ -40,7 +38,6 @@ public class Forum {
     private List<Comment> comments;
 
     @Field(name = "post_date")
-    @NotNull(message = "post_date cannot be null")
     private LocalDateTime postDate = LocalDateTime.now();
 
     @Getter
@@ -56,8 +53,6 @@ public class Forum {
         @NotNull(message = "content cannot be null")
         private String content;
 
-        @Field(name = "post_date")
-        @NotNull(message = "post_date cannot be null")
         private LocalDateTime postDate = LocalDateTime.now();
     }
 }

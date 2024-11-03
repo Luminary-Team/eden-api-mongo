@@ -27,9 +27,9 @@ public class ForumService {
                 .toList();
     }
 
-    public ForumResponse getForumById(Integer id) {
+    public ForumResponse getForumById(String id) {
         log.info("[FORUM] Fetching forum by ID: " + id);
-        Forum forum = forumRepository.findById(id)
+        Forum forum = forumRepository.findById(new ObjectId(id))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
         log.info("[FORUM] Forum found with ID: " + id);
         return new ForumResponse(forum);
@@ -50,9 +50,9 @@ public class ForumService {
         return new ForumResponse(savedForum);
     }
 
-    public ForumResponse addComment(Integer forumId, Forum.Comment comment) {
+    public ForumResponse addComment(String forumId, Forum.Comment comment) {
         log.info("[FORUM] Adding comment to forum ID: " + forumId);
-        Forum forum = forumRepository.findById(forumId)
+        Forum forum = forumRepository.findById(new ObjectId(forumId))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
 
         if (forum.getComments() == null) {
