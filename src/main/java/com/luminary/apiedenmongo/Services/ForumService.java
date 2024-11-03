@@ -1,95 +1,58 @@
-package com.luminary.apiedenmongo.Services;
+package com.luminary.apiedenmongo.Models.Database;
 
-import com.luminary.apiedenmongo.Models.Database.Forum;
-import com.luminary.apiedenmongo.Models.Request.ForumRequest;
-import com.luminary.apiedenmongo.Models.Request.LikeRequest;
-import com.luminary.apiedenmongo.Models.Response.ForumResponse;
-import com.luminary.apiedenmongo.Repositories.ForumRepository;
-import com.luminary.apiedenmongo.Models.Exception.HttpError;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.bson.types.ObjectId;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-@Slf4j
-public class ForumService {
-    private final ForumRepository forumRepository;
+@Getter
+@Setter
+@ToString
+@Document(collection = "Forum")
+@Schema(description = "Representation of a forum with content, comments and likes.")
+public class Forum {
 
-    public List<ForumResponse> getAllForums() {
-        log.info("[FORUM] Fetching all forums");
-        return forumRepository.findAll().stream()
-                .map(ForumResponse::new)
-                .toList();
-    }
+    @Id
+    @Field(name = "_id")
+    private ObjectId id;
 
-    public ForumResponse getForumById(String id) {
-        log.info("[FORUM] Fetching forum by ID: " + id);
-        if (id.length() != 24) {
-            throw new HttpError(HttpStatus.BAD_REQUEST, "ID com tamanho inválido");
-        }        Forum forum = forumRepository.findById(new ObjectId(id))
-                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
-        log.info("[FORUM] Forum found with ID: " + id);
-        return new ForumResponse(forum);
-    }
+    @Field(name = "user_id")
+    @NotNull(message = "user_id cannot be null")
+    @Schema(description = "User ID of the forum creator.", example = "12345")
+    private int userId;
 
-    public ForumResponse createForum(ForumRequest forumRequest) {
-        log.info("[FORUM] Creating forum: " + forumRequest);
+    @Field(name = "content")
+    @NotNull(message = "content cannot be null")
+    @Schema(description = "Forum content.", example = "This is the forum content")
+    private String content;
 
-        Forum forum = new Forum();
-        forum.setUserId(forumRequest.getUserId());
-        forum.setContent(forumRequest.getContent());
-        forum.setComments(new ArrayList<>());
-        forum.setLikeId(new ArrayList<>());
+    @Field(name = "comments")
+    private List<Comment> comments;
 
-        log.info("[FORUM] Persisting forum in database");
-        Forum savedForum = forumRepository.save(forum);
-        log.info("[FORUM] Forum created successfully: " + savedForum);
+    @Field(name = "post_date")
+    private LocalDateTime postDate = LocalDateTime.now();
 
-        return new ForumResponse(savedForum);
-    }
+    @Getter
+    @Setter
+    @ToString
+    @Schema(description = "Comment made by a user in the forum.")
+    public static class Comment {
+        @Schema(description = "User ID of the comment.", example = "123")
+        @NotNull(message = "user_id cannot be null")
+        private int userId;
 
-    public ForumResponse addComment(String forumId, Forum.Comment comment) {
-        log.info("[FORUM] Adding comment to forum ID: " + forumId);
-        Forum forum = forumRepository.findById(new ObjectId(forumId))
-                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
+        @Schema(description = "Content of the comment.", example = "This is a content.")
+        @NotNull(message = "content cannot be null")
+        private String content;
 
-        if (forum.getComments() == null) {
-            forum.setComments(new ArrayList<>());
-        }
-
-        forum.getComments().add(comment);
-        log.info("[FORUM] Persisting updated forum in database");
-        Forum updatedForum = forumRepository.save(forum);
-        log.info("[FORUM] Comment added successfully to forum ID: " + forumId);
-
-        return new ForumResponse(updatedForum);
-    }
-
-    public ForumResponse addLike(String forumId, LikeRequest likeRequest) {
-        log.info("[FORUM] Adding like to forum ID: " + forumId);
-        Forum forum = forumRepository.findById(new ObjectId(forumId))
-                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
-
-        if (forum.getLikeId() != null && forum.getLikeId().contains(likeRequest.getUserId())) {
-            log.info("[FORUM] Like already exists for user ID: " + likeRequest.getUserId());
-            return new ForumResponse(forum);
-        }
-
-        if (forum.getLikeId() == null) {
-            forum.setLikeId(new ArrayList<>());
-        }
-
-        forum.getLikeId().add(likeRequest.getUserId());
-        log.info("[FORUM] Persisting updated forum in database");
-        Forum updatedForum = forumRepository.save(forum);
-        log.info("[FORUM] Like added successfully to forum ID: " + forumId);
-
-        return new ForumResponse(updatedForum);
+        private LocalDateTime postDate = LocalDateTime.now();
     }
 }
