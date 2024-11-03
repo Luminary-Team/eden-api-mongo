@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -36,8 +37,8 @@ public class Forum {
     @Field(name = "comments")
     private List<Comment> comments;
 
-    @Field(name = "like_id")
-    private List<Long> likeId;
+    @Field(name = "post_date")
+    private LocalDateTime postDate = LocalDateTime.now();
 
     @Getter
     @Setter
@@ -51,5 +52,7 @@ public class Forum {
         @Schema(description = "Content of the comment.", example = "This is a content.")
         @NotNull(message = "content cannot be null")
         private String content;
+
+        private LocalDateTime postDate = LocalDateTime.now();
     }
 }
