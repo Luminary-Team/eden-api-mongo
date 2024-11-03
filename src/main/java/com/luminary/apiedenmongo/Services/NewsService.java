@@ -31,7 +31,6 @@ public class NewsService {
         news.setUrl(newsRequest.getUrl());
         news.setTitle(newsRequest.getTitle());
         news.setDescription(newsRequest.getDescription());
-        news.setDate(newsRequest.getDate());
 
         log.info("[NEWS] Persisting news in database");
         News savedNews = newsRepository.save(news);
