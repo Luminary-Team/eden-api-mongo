@@ -13,8 +13,8 @@ import java.util.Date;
 @Setter
 public class ForumRequest {
 
-    @Schema(description = "User ID of the forum creator.", example = "12345")
-    @NotNull(message = "user_id cannot be null")
+    @Schema(description = "userId of the forum creator.", example = "12345")
+    @NotNull(message = "userId cannot be null")
     private int userId;
 
     @Schema(description = "Forum content.", example = "This is the forum content")
