@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class ForumService {
         forum.setUserId(forumRequest.getUserId());
         forum.setContent(forumRequest.getContent());
         forum.setComments(new ArrayList<>());
+        forum.setPostDate(LocalDateTime.now());
 
         log.info("[FORUM] Persisting forum in database");
         Forum savedForum = forumRepository.save(forum);
@@ -59,6 +61,7 @@ public class ForumService {
             forum.setComments(new ArrayList<>());
         }
 
+        comment.setPostDate(LocalDateTime.now());
         forum.getComments().add(comment);
         log.info("[FORUM] Persisting updated forum in database");
         Forum updatedForum = forumRepository.save(forum);
