@@ -4,6 +4,7 @@ import com.luminary.apiedenmongo.Models.Database.Forum;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -13,13 +14,13 @@ public class ForumResponse {
     private int userId;
     private String content;
     private List<Forum.Comment> comments;
-    private List<Long> likeId;
+    private LocalDateTime postDate;
 
     public ForumResponse(Forum forum) {
         this.id = forum.getId().toHexString();
         this.userId = forum.getUserId();
         this.content = forum.getContent();
         this.comments = forum.getComments();
-        this.likeId = forum.getLikeId();
+        this.postDate = forum.getPostDate();
     }
 }

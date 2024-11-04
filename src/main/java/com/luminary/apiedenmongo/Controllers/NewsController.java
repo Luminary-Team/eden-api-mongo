@@ -31,15 +31,4 @@ public class NewsController {
     public ResponseEntity<List<NewsResponse>> getAllNews() {
         return ResponseEntity.status(HttpStatus.OK).body(newsService.getAllNews());
     }
-
-
-    @Operation(summary = "Create news", description = "Create a new news.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "News created successfully"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
-    })
-    @PostMapping
-    public ResponseEntity<NewsResponse> createNews(@RequestBody NewsRequest news) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(newsService.createNews(news));
-    }
 }
