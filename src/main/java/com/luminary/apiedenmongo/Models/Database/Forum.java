@@ -38,7 +38,7 @@ public class Forum {
     private List<Comment> comments;
 
     @Field(name = "post_date")
-    private LocalDateTime postDate = LocalDateTime.now();
+    private LocalDateTime postDate;
 
     @Getter
     @Setter
@@ -53,6 +53,6 @@ public class Forum {
         @NotNull(message = "content cannot be null")
         private String content;
 
-        private LocalDateTime postDate = LocalDateTime.now();
+        private LocalDateTime postDate;
     }
 }
