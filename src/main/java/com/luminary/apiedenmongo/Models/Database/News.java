@@ -26,9 +26,9 @@ public class News {
     @Schema(description = "News ID.", example = "12345")
     private ObjectId id;
 
-    @Field(name = "post_id")
-    @NotNull(message = "postId cannot be null")
-    private int postId;
+    @Field(name = "news_id")
+    @NotNull(message = "newsId cannot be null")
+    private int newsId;
 
     @Field(name = "url")
     @NotNull(message = "url cannot be null")
