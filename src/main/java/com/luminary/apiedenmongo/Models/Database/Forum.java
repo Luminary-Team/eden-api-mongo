@@ -24,6 +24,10 @@ public class Forum {
     @Field(name = "_id")
     private ObjectId id;
 
+    @Field(name = "post_id")
+    @NotNull(message = "postId cannot be null")
+    private int postId;
+
     @Field(name = "user_id")
     @NotNull(message = "user_id cannot be null")
     @Schema(description = "User ID of the forum creator.", example = "12345")

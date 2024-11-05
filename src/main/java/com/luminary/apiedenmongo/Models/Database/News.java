@@ -12,6 +12,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @ToString
@@ -23,6 +25,10 @@ public class News {
     @Field(name = "_id")
     @Schema(description = "News ID.", example = "12345")
     private ObjectId id;
+
+    @Field(name = "news_id")
+    @NotNull(message = "newsId cannot be null")
+    private int newsId;
 
     @Field(name = "url")
     @NotNull(message = "url cannot be null")
@@ -44,7 +50,5 @@ public class News {
 
     @Field(name = "date")
     @NotNull(message = "date cannot be null")
-    @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "date must follow the format YYYY-MM-DD")
-    @Schema(description = "Date of news.", example = "2024-10-16")
-    private String date;
+    private LocalDateTime postDate;
 }

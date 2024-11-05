@@ -50,7 +50,11 @@ public class ForumService {
     public ForumResponse createForum(ForumRequest forumRequest) {
         log.info("[FORUM] Creating forum: " + forumRequest);
 
+        Forum last = forumRepository.findTop1ByOrderByPostDateDesc();
+        int newPostId = (last == null) ? 1 : last.getPostId() + 1;
+
         Forum forum = new Forum();
+        forum.setPostId(newPostId);
         forum.setUserId(forumRequest.getUserId());
         forum.setContent(forumRequest.getContent());
         forum.setComments(new ArrayList<>());

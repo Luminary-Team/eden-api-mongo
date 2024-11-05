@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ForumRepository extends MongoRepository<Forum, ObjectId> {
     List<Forum> findByUserId(int userId);
+    Forum findTop1ByOrderByPostDateDesc();
 }
