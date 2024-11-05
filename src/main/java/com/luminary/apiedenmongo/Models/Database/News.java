@@ -30,6 +30,10 @@ public class News {
     @Field(name = "article_id")
     @NotNull(message = "articleId cannot be null")
     private int articleId;
+  
+    @Field(name = "news_id")
+    @NotNull(message = "newsId cannot be null")
+    private int newsId;
 
     @Field(name = "url")
     @NotNull(message = "url cannot be null")
