@@ -24,6 +24,10 @@ public class Forum {
     @Field(name = "_id")
     private ObjectId id;
 
+    @Field(name = "post_id")
+    @NotNull(message = "postId cannot be null")
+    private int postId;
+
     @Field(name = "user_id")
     @NotNull(message = "user_id cannot be null")
     @Schema(description = "User ID of the forum creator.", example = "12345")
@@ -34,17 +38,27 @@ public class Forum {
     @Schema(description = "Forum content.", example = "This is the forum content")
     private String content;
 
+    @Field(name = "post_date")
+    @NotNull(message = "postDate cannot be null")
+    private LocalDateTime postDate;
+
     @Field(name = "comments")
     private List<Comment> comments;
 
-    @Field(name = "post_date")
-    private LocalDateTime postDate;
+    @Field(name = "engager")
+    private List<Integer> engager;
 
     @Getter
     @Setter
     @ToString
     @Schema(description = "Comment made by a user in the forum.")
     public static class Comment {
+
+        @Field(name = "post_id")
+        @NotNull(message = "postId cannot be null")
+        private int postId;
+
+        @Field(name = "user_id")
         @Schema(description = "User ID of the comment.", example = "123")
         @NotNull(message = "user_id cannot be null")
         private int userId;
@@ -53,6 +67,8 @@ public class Forum {
         @NotNull(message = "content cannot be null")
         private String content;
 
+        @Field(name = "post_date")
+        @NotNull(message = "postDate cannot be null")
         private LocalDateTime postDate;
     }
 }
