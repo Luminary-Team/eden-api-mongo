@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -26,9 +27,9 @@ public class News {
     @Schema(description = "News ID.", example = "12345")
     private ObjectId id;
 
-    @Field(name = "post_id")
-    @NotNull(message = "postId cannot be null")
-    private int postId;
+    @Field(name = "article_id")
+    @NotNull(message = "articleId cannot be null")
+    private int articleId;
 
     @Field(name = "url")
     @NotNull(message = "url cannot be null")
@@ -50,5 +51,8 @@ public class News {
 
     @Field(name = "date")
     @NotNull(message = "date cannot be null")
-    private LocalDateTime postDate;
+    private LocalDateTime date;
+
+    @Field(name = "engager")
+    private List<Integer> engager;
 }
