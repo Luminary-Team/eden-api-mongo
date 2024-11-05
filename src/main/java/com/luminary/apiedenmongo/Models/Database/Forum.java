@@ -58,6 +58,7 @@ public class Forum {
         @NotNull(message = "postId cannot be null")
         private int postId;
 
+        @Field(name = "user_id")
         @Schema(description = "User ID of the comment.", example = "123")
         @NotNull(message = "user_id cannot be null")
         private int userId;
