@@ -1,7 +1,5 @@
 package com.luminary.apiedenmongo.Services;
 
-import com.luminary.apiedenmongo.Models.Database.News;
-import com.luminary.apiedenmongo.Models.Request.NewsRequest;
 import com.luminary.apiedenmongo.Models.Response.NewsResponse;
 import com.luminary.apiedenmongo.Repositories.NewsRepository;
 import lombok.RequiredArgsConstructor;
