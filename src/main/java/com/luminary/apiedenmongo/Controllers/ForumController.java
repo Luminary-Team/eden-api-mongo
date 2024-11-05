@@ -44,6 +44,17 @@ public class ForumController {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.getForumById(id));
     }
 
+    @Operation(summary = "Get forum by userId", description = "Returns a list of forums by an userId.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Forum list returned successfully"),
+            @ApiResponse(responseCode = "400", description = "User doesn't have any post"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ForumResponse>> getForumByUserId(@PathVariable("userId") String userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(forumService.getForumByUserId(userId));
+    }
+
     @Operation(summary = "Create forum", description = "Create a new forum.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Forum created successfully"),
