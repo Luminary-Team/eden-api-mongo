@@ -2,6 +2,7 @@ package com.luminary.apiedenmongo.Services;
 
 import com.luminary.apiedenmongo.Models.Database.Forum;
 import com.luminary.apiedenmongo.Models.Request.ForumRequest;
+import com.luminary.apiedenmongo.Models.Request.LikeRequest;
 import com.luminary.apiedenmongo.Models.Response.ForumResponse;
 import com.luminary.apiedenmongo.Repositories.ForumRepository;
 import com.luminary.apiedenmongo.Models.Exception.HttpError;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -81,6 +83,19 @@ public class ForumService {
         log.info("[FORUM] Persisting updated forum in database");
         Forum updatedForum = forumRepository.save(forum);
         log.info("[FORUM] Comment added successfully to forum ID: " + forumId);
+
+        return new ForumResponse(updatedForum);
+    }
+
+    public ForumResponse addLike(String forumId, LikeRequest engagerId) {
+        log.info("[FORUM] Adding like to forum ID: " + forumId);
+        Forum forum = forumRepository.findById(new ObjectId(forumId))
+                .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
+
+        forum.getEngager().add(engagerId.getEngagerId());
+        log.info("[FORUM] Persisting updated forum in database");
+        Forum updatedForum = forumRepository.save(forum);
+        log.info("[FORUM] Like added successfully to forum ID: " + forumId);
 
         return new ForumResponse(updatedForum);
     }
