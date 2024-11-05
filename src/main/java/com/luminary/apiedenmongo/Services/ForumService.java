@@ -36,6 +36,17 @@ public class ForumService {
         return new ForumResponse(forum);
     }
 
+    public List<ForumResponse> getForumByUserId(String userId) {
+        log.info("[FORUM Fetching forum by userId: {}", userId);
+        List<Forum> forumList = forumRepository.findByUserId(Integer.parseInt(userId));
+        if (forumList.isEmpty()) {
+            throw new HttpError(HttpStatus.BAD_REQUEST, "Usuário não criou nenhum post.");
+        }
+        return forumList.stream()
+                .map(ForumResponse::new)
+                .toList();
+    }
+
     public ForumResponse createForum(ForumRequest forumRequest) {
         log.info("[FORUM] Creating forum: " + forumRequest);
 
