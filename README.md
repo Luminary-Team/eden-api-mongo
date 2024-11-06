@@ -36,6 +36,8 @@
   <ul>
     <li>Database</li>
     <li>Exception</li>
+    <li>Request</li>
+    <li>Response</li>
   </ul>
   <li>Repository</li>
   <li>Service</li>
@@ -44,7 +46,8 @@
 <h2>📚 Sobre o Projeto</h2>
 <p>
   Este projeto foi desenvolvido como parte das disciplinas <strong>Desenvolvimento II</strong>,
-  do 2º ano. O objetivo foi criar uma API para pegar informações de um banco de dados MongoDB.
+  do 2º ano. O objetivo foi criar uma API para pegar informações de um banco de dados MongoDB que é pego por um RPA que traz o conteúdo do Banco de Dados
+  SQL do 1° ano.
 </p>
 
 <hr>
