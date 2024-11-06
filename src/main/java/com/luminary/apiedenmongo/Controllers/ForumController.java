@@ -82,7 +82,7 @@ public class ForumController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/like/{forumId}")
-    private ResponseEntity<ForumResponse> addLike(String forumId, LikeRequest engagerId) {
+    private ResponseEntity<ForumResponse> addLike(@PathVariable("forumId") String forumId, @RequestBody LikeRequest engagerId) {
         return ResponseEntity.status(HttpStatus.OK).body(forumService.addLike(forumId, engagerId));
     }
 }
