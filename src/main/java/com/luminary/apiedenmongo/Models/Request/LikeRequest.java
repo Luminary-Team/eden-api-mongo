@@ -11,4 +11,7 @@ public class LikeRequest {
     public LikeRequest(int engagerId) {
         this.engagerId = engagerId;
     }
+
+    public LikeRequest() {
+    }
 }

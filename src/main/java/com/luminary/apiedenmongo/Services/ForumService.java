@@ -92,6 +92,14 @@ public class ForumService {
         Forum forum = forumRepository.findById(new ObjectId(forumId))
                 .orElseThrow(() -> new HttpError(HttpStatus.BAD_REQUEST, "Fórum não encontrado"));
 
+        if (forum.getEngager() != null && forum.getEngager().contains(engagerId.getEngagerId())) {
+            throw new HttpError(HttpStatus.BAD_REQUEST, "Usuário ja curtiu o fórum.");
+        }
+
+        if (forum.getEngager() == null) {
+            forum.setEngager(new ArrayList<>());
+        }
+
         forum.getEngager().add(engagerId.getEngagerId());
         log.info("[FORUM] Persisting updated forum in database");
         Forum updatedForum = forumRepository.save(forum);
